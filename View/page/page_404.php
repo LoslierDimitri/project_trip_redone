@@ -10,7 +10,7 @@
 
 <?php
 $path = $_SERVER["DOCUMENT_ROOT"];
-$path_new = $path . "/project_trip_redone/View/include/all_controller.php";
+$path_new = $path . "/project_trip_redone/View/component/all_controller.php";
 include($path_new);
 ?>
     

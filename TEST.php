@@ -10,10 +10,10 @@ $result = "";
 //$result = $database->get_user_all_information(1);
 //$result = $database->get_user_information("nom", "pseudo", "alpha_pseudo");
 
-$request_test_name = $database->get_user_information("nom", "nom", "test_nom");
+$result = $database->get_user_information("type", "nom", "test_pseu");
 
 echo "<pre>";
-print_r($request_test_name[0]["nom"]);
+print_r($result);
 echo "</pre>";
 
 if ($result != []) {

@@ -11,6 +11,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <?php
 //code
+session_destroy();
+header('location: /project_trip_redone/Controller/controller_main.php');
+exit;
 ?>
 
 <?php

@@ -5,7 +5,7 @@ in your file where you need to call a database request:
 
 ------------------------------------------------------------------
 $path = $_SERVER["DOCUMENT_ROOT"];
-$path_new = $path . "./Forum/Models/Database.php";
+$path_new = $path . "/project_trip_redone/Model/Database.php";
 require($path_new);
 $database = new Database();
 ------------------------------------------------------------------

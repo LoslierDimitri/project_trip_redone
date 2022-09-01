@@ -6,3 +6,4 @@
 <a href="/project_trip_redone/Controller/controller_result.php">controller_result</a><br>
 <a href="/project_trip_redone/Controller/controller_buy.php">controller_buy</a><br>
 <a href="/project_trip_redone/Controller/controller_404.php">controller_404</a><br>
+<a href="/project_trip_redone/TEST.php">TEST</a><br>

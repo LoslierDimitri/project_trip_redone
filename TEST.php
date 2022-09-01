@@ -7,9 +7,17 @@ $database = new Database();
 $result = "";
 
 //$database->insert_user("c", "alpha_nom", "alpha_prenom", 10, "m", "alpha_pseudo", "alpha_mot_de_passe", "alpha@mail", "0102030405", "alpha_pays", "alpha_adresse");
-//$result = $database->get_user(1);
+//$result = $database->get_user_all_information(1);
+//$result = $database->get_user_information("nom", "pseudo", "alpha_pseudo");
+
+$request_test_name = $database->get_user_information("nom", "nom", "test_nom");
 
 echo "<pre>";
-print_r($result);
+print_r($request_test_name[0]["nom"]);
 echo "</pre>";
+
+if ($result != []) {
+
+}
+
 ?>

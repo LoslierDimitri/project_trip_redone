@@ -47,7 +47,24 @@ class Database
     }
 
     //-------------------------------------------------------------------------------- user function
-    public function get_user($id_user)
+    public function get_user_information($select, $element, $value)
+    {
+        $this->connection = $this->set_connection();
+
+        if ($this->connection != null) {
+            $req = "select " . $select . " from users where " . $element . "=:value;";
+            $stmt = $this->connection->prepare($req);
+            $stmt->bindValue(":value", $value);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+
+            return $result;
+        }
+
+        $this->connection = $this->del_connection();
+    }
+
+    public function get_user_all_information($id_user)
     {
         $this->connection = $this->set_connection();
 

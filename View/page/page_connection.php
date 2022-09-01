@@ -10,7 +10,25 @@
 
 <?php
 $path = $_SERVER["DOCUMENT_ROOT"];
+$path_new = $path . "/project_trip_redone/View/component/navbar.php";
+include($path_new);
+?>
+
+<?php
+$path = $_SERVER["DOCUMENT_ROOT"];
 $path_new = $path . "/project_trip_redone/View/component/all_controller.php";
+include($path_new);
+?>
+
+<?php
+$path = $_SERVER["DOCUMENT_ROOT"];
+$path_new = $path . "/project_trip_redone/View/component/form_connection.php";
+include($path_new);
+?>
+
+<?php
+$path = $_SERVER["DOCUMENT_ROOT"];
+$path_new = $path . "/project_trip_redone/View/component/footer.php";
 include($path_new);
 ?>
     

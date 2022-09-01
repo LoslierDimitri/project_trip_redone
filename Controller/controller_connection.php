@@ -22,4 +22,10 @@ include($path_new);
 
 <?php
 //form post
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //connection
+
+    echo ("<script>location.href = '/project_trip_redone/Controller/controller_main.php';</script>");
+    exit();
+}
 ?>

@@ -4,20 +4,40 @@ $path_new = $path . "/project_trip_redone/Model/Database.php";
 require($path_new);
 $database = new Database();
 
+$path = $_SERVER["DOCUMENT_ROOT"];
+$path_new = $path . "/project_trip_redone/Model/Api.php";
+require($path_new);
+$api = new Api();
+
 $result = "";
 
-//$database->insert_user("c", "alpha_nom", "alpha_prenom", 10, "m", "alpha_pseudo", "alpha_mot_de_passe", "alpha@mail", "0102030405", "alpha_pays", "alpha_adresse");
-//$result = $database->get_user_all_information(1);
-//$result = $database->get_user_information("nom", "pseudo", "alpha_pseudo");
+$result = $api->api_call_travel_advisor();
 
-$result = $database->get_user_information("type", "nom", "test_pseu");
+die();
+$file = file_get_contents("TEST_FILE.json");
+$result = json_decode($file);
 
-echo "<pre>";
-print_r($result);
-echo "</pre>";
+$tab = [];
 
-if ($result != []) {
-
+for ($i = 0; $i < count($result->data); $i++) {
+    if ($result->data[$i]) {
+        echo "<pre>";
+        // print_r($result->data[$i]->location_id);
+        $tab[$i] = $result->data[$i]->location_id;
+        echo "</pre>";
+        //$result->data[$i]->result_object->location_id
+    }
 }
 
-?>
+echo "<pre>";
+// print_r($result->data[$i]->location_id);
+print_r($tab);
+echo "</pre>";
+
+// $date1 = new DateTime("2007-03-24");
+// $date2 = new DateTime("2009-06-26");
+// $interval = $date1->diff($date2);
+// echo "difference " . $interval->y . " years, " . $interval->m." months, ".$interval->d." days "; 
+
+// // shows the total amount of days (not divided into years, months and days like above)
+// echo "difference " . $interval->days . " days ";

@@ -139,6 +139,35 @@ class Api
 
         //call to get detail for hotel
         //hotels/get-details (Deprecated)
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://travel-advisor.p.rapidapi.com/hotels/get-details?location_id=197424&adults=" . $voyage_nombre_personne_adulte . "&lang=en_US&currency=USD&nights=" . $voyage_nombre_nuit . "&rooms=" . $voyage_nombre_chambre . "",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: travel-advisor.p.rapidapi.com",
+                "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        }
+
+        echo $response;
 
         return $result;
     }

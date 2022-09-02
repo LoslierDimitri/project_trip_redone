@@ -12,8 +12,52 @@ $api = new Api();
 
 to call a request you do:
 ------------------------------------------------------------------
+$api->api_call_travel_advisor();
 ------------------------------------------------------------------
 */
+
+/*
+api used
+travel advisor
+https://rapidapi.com/apidojo/api/travel-advisor/
+locations/search (Deprecating)
+hotels/list (Deprecated)
+hotels/get-details (Deprecated)
+
+the fork the spoon
+https://rapidapi.com/apidojo/api/the-fork-the-spoon/
+
+priceline
+https://rapidapi.com/tipsters/api/priceline-com-provider/pricing
+
+*/
+
+class Hotel_information
+{
+    public $hotel_name;
+    public $hotel_address;
+    public $hotel_image;
+    public $hotel_rate;
+    public $hotel_class;
+    public $hotel_phone;
+    public $hotel_price;
+
+    public function __construct($name, $address, $image, $rate, $class, $phone, $price)
+    {
+        $this->hotel_name = $name;
+        $this->hotel_address = $address;
+        $this->hotel_image = $image;
+        $this->hotel_rate = $rate;
+        $this->hotel_class = $class;
+        $this->hotel_phone = $phone;
+        $this->hotel_price = $price;
+    }
+}
+
+class Restaurant_information
+{
+}
+
 class Api
 {
     //api key
@@ -26,24 +70,16 @@ class Api
 
     return a table of hotel with differents informations
     structure:
-    [
-
-    ]
+    $result[ID]->hotel_name;
+    $result[ID]->hotel_address;
+    $result[ID]->hotel_image;
+    $result[ID]->hotel_rate;
+    $result[ID]->hotel_class;
+    $result[ID]->hotel_phone;
+    $result[ID]->hotel_price;
     */
-    public function api_call_travel_advisor()
+    public function api_call_travel_advisor($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre, $voyage_hotel_class)
     {
-        /**/
-        $voyage_lieu_depart = "bordeaux";
-        $voyage_lieu_arrive = "paris";
-        $voyage_date_aller = "2022-11-11";
-        $voyage_date_retour = "2022-12-12";
-        $voyage_nombre_personne_adulte = 2;
-        $voyage_nombre_personne_enfant = 2;
-        $voyage_nombre_chambre = 2;
-
-        $voyage_hotel_class = 3;
-        /**/
-
         $return_result = "";
 
         //------------------------------------------
@@ -139,41 +175,66 @@ class Api
 
         //call to get detail for hotel
         //hotels/get-details (Deprecated)
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+        $hotel_information = [];
+        $hotel_list = [];
 
-        curl_setopt_array($curl, [
-            CURLOPT_URL => "https://travel-advisor.p.rapidapi.com/hotels/get-details?location_id=197424&adults=" . $voyage_nombre_personne_adulte . "&lang=en_US&currency=USD&nights=" . $voyage_nombre_nuit . "&rooms=" . $voyage_nombre_chambre . "",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => [
-                "X-RapidAPI-Host: travel-advisor.p.rapidapi.com",
-                "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a"
-            ],
-        ]);
+        for ($i = 0; $i < 3 /*count($location_id_hotel)*/; $i++) {
+            $hotel_information = [];
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 
-        curl_close($curl);
+            curl_setopt_array($curl, [
+                CURLOPT_URL => "https://travel-advisor.p.rapidapi.com/hotels/get-details?location_id=" . $location_id_hotel[$i] . "&adults=" . $voyage_nombre_personne_adulte . "&lang=en_US&currency=USD&nights=" . $voyage_nombre_nuit . "&rooms=" . $voyage_nombre_chambre . "",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_HTTPHEADER => [
+                    "X-RapidAPI-Host: travel-advisor.p.rapidapi.com",
+                    "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a"
+                ],
+            ]);
 
-        if ($err) {
-            echo "cURL Error #:" . $err;
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+                echo "cURL Error #:" . $err;
+            }
+
+            $result = json_decode($response);
+
+            $hotel_information[0] = $result->data[0]->name;
+            $hotel_information[1] = $result->data[0]->address;
+            $hotel_information[2] = $result->data[0]->photo->images->original->url;
+            $hotel_information[3] = $result->data[0]->rating;
+            $hotel_information[4] = $result->data[0]->hotel_class;
+            $hotel_information[5] = $result->data[0]->phone;
+            $hotel_information[6] = $result->data[0]->price;
+
+            $hotel_list[$i] = new Hotel_information($hotel_information[0], $hotel_information[1], $hotel_information[2], $hotel_information[3], $hotel_information[4], $hotel_information[5], $hotel_information[6]);
         }
 
-        echo $response;
+        $return_result = $hotel_list;
 
-        return $result;
+        return $return_result;
     }
 
     /*
     --------------------------------------------------------------------------------------------------------------
+    the fork the spoon
+    used to find restaurant and informations about them
+
+    return a table of restaurant with differents informations
+    structure:
+    $result[ID]->hotel_name;
     */
     public function api_call_the_fork_the_spoon()
     {

@@ -49,12 +49,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $password_after_hash = password_hash($password_before_hash, PASSWORD_DEFAULT);
 
             $database->insert_user($type, $inscription_name, $inscription_prenom, $inscription_age, $inscription_sexe, $inscription_pseudo, $password_after_hash, $inscription_email, $inscription_telephone, $inscription_pays, $inscription_adresse);
+            
+            $_SESSION["type"] = $database->get_user_information("type", "nom", $_POST["inscription_name"]);
+            $_SESSION["id"] = $database->get_user_information("id", "nom", $_POST["inscription_name"]);
 
             echo ("<script>location.href = '/project_trip_redone/Controller/controller_main.php';</script>");
             exit();
-
-            $_SESSION["type"] = $database->get_user_information("type", "nom", $_POST["inscription_name"]);
-            $_SESSION["id"] = $database->get_user_information("id", "nom", $_POST["inscription_name"]);
         }
     }
 

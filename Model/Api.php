@@ -18,6 +18,7 @@ $api->api_call_travel_advisor();
 
 /*
 api used
+
 travel advisor
 https://rapidapi.com/apidojo/api/travel-advisor/
 locations/search (Deprecating)
@@ -26,6 +27,9 @@ hotels/get-details (Deprecated)
 
 the fork the spoon
 https://rapidapi.com/apidojo/api/the-fork-the-spoon/
+locations/v2/auto-complete
+locations/v2/list
+restaurants/v2/list
 
 priceline
 https://rapidapi.com/tipsters/api/priceline-com-provider/pricing
@@ -73,7 +77,7 @@ class Restaurant_information
 }
 
 class Fly_information{
-    
+
 }
 
 class Api
@@ -390,8 +394,19 @@ class Api
 
     /*
     --------------------------------------------------------------------------------------------------------------
+    priceline
+    used to find fly and informations about them
+
+    return a table of fly with differents informations
+    structure:
+    $result[ID]->restaurant_name;
     */
     public function api_call_priceline()
     {
+        $return_result = "";
+
+
+        
+        return $return_result;
     }
 }

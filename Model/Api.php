@@ -56,6 +56,24 @@ class Hotel_information
 
 class Restaurant_information
 {
+    public $restaurant_name;
+    public $restaurant_address;
+    public $restaurant_image;
+    public $restaurant_price;
+    public $restaurant_rate;
+
+    public function __construct($name, $address, $image, $price, $rate)
+    {
+        $this->restaurant_name = $name;
+        $this->restaurant_address = $address;
+        $this->restaurant_image = $image;
+        $this->restaurant_price = $price;
+        $this->restaurant_rate = $rate;
+    }
+}
+
+class Fly_information{
+    
 }
 
 class Api
@@ -151,7 +169,7 @@ class Api
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "X-RapidAPI-Host: travel-advisor.p.rapidapi.com",
-                "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a"
+                $this->key,
             ],
         ]);
 
@@ -173,12 +191,13 @@ class Api
             }
         }
 
+        //------------------------------------------
         //call to get detail for hotel
         //hotels/get-details (Deprecated)
         $hotel_information = [];
         $hotel_list = [];
 
-        for ($i = 0; $i < 3 /*count($location_id_hotel)*/; $i++) {
+        for ($i = 0; $i < count($location_id_hotel); $i++) {
             $hotel_information = [];
 
             $curl = curl_init();
@@ -196,7 +215,7 @@ class Api
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_HTTPHEADER => [
                     "X-RapidAPI-Host: travel-advisor.p.rapidapi.com",
-                    "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a"
+                    $this->key,
                 ],
             ]);
 
@@ -234,10 +253,139 @@ class Api
 
     return a table of restaurant with differents informations
     structure:
-    $result[ID]->hotel_name;
+    $result[ID]->restaurant_name;
+    $result[ID]->restaurant_address;
+    $result[ID]->restaurant_image;
+    $result[ID]->restaurant_price;
+    $result[ID]->restaurant_rate;
     */
-    public function api_call_the_fork_the_spoon()
+    public function api_call_the_fork_the_spoon($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre)
     {
+        $return_result = "";
+
+        //------------------------------------------
+        //call to get location_id google
+        //locations/v2/auto-complete
+        $location_id_google = "";
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://the-fork-the-spoon.p.rapidapi.com/locations/v2/auto-complete?text=" . $voyage_lieu_arrive . "",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: the-fork-the-spoon.p.rapidapi.com",
+                $this->key,
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        }
+
+        $result = json_decode($response);
+
+        $location_id_google = $result->data->geolocation[0]->id->id;
+
+        //------------------------------------------
+        //call to get location_id
+        //locations/v2/list
+        $location_id = "";
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://the-fork-the-spoon.p.rapidapi.com/locations/v2/list?google_place_id=" . $location_id_google . "&geo_ref=false&geo_text=" . $voyage_lieu_arrive . "&geo_type=locality",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: the-fork-the-spoon.p.rapidapi.com",
+                $this->key,
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        }
+
+        $result = json_decode($response);
+
+        $location_id = $result->id_city;
+
+        //------------------------------------------
+        //call to get a list of restaurant
+        //restaurants/v2/list
+        $restaurant_list = [];
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://the-fork-the-spoon.p.rapidapi.com/restaurants/v2/list?queryPlaceValueCityId=" . $location_id . "&pageSize=20&pageNumber=1",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: the-fork-the-spoon.p.rapidapi.com",
+                $this->key,
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        }
+
+        $result = json_decode($response);
+
+        //get restaurant information
+        for ($i = 0; $i < count($result->data); $i++) {
+            $restaurant_nom = $result->data[$i]->name;
+            $restaurant_adresse = $result->data[$i]->address->street;
+            $restaurant_image = $result->data[$i]->mainPhoto->source;
+            $restaurant_prix = $result->data[$i]->priceRange;
+            $restaurant_note = $result->data[$i]->aggregateRatings->tripadvisor->ratingValue;
+
+            $restaurant_list[$i] = new Restaurant_information($restaurant_nom, $restaurant_adresse, $restaurant_image, $restaurant_prix, $restaurant_note);
+        }
+
+        $return_result = $restaurant_list;
+
+        return $return_result;
     }
 
     /*

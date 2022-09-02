@@ -9,8 +9,6 @@ $path_new = $path . "/project_trip_redone/Model/Api.php";
 require($path_new);
 $api = new Api();
 
-$result = "";
-
 $voyage_lieu_depart = "bordeaux";
 $voyage_lieu_arrive = "paris";
 $voyage_date_aller = "2022-11-11";
@@ -19,14 +17,95 @@ $voyage_nombre_personne_adulte = 2;
 $voyage_nombre_personne_enfant = 2;
 $voyage_nombre_chambre = 2;
 $voyage_hotel_class = 3;
+//-----------------------------------------------------------------------------
+//trip advisor
+$result_hotel = "";
+//$result_hotel = $api->api_call_travel_advisor($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre, $voyage_hotel_class);
 
-$result = $api->api_call_travel_advisor($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre, $voyage_hotel_class);
+//-----------------------------------------------------------------------------
+//fork
+$result_restaurant = "";
+//$result_restaurant = $api->api_call_the_fork_the_spoon($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre);
+
+//-----------------------------------------------------------------------------
+//priceline
 
 echo "<pre>";
-print_r($result);
+print_r($result_hotel);
 echo "</pre>";
 
-echo $result[0]->hotel_name;
+echo "<pre>";
+print_r($result_restaurant);
+echo "</pre>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+die();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$file = file_get_contents("TEST_FILE.json");
+$result = json_decode($file);
+
+$restaurant_nom = $result->data[1]->name . "<br>";
+$restaurant_adresse = $result->data[1]->address->street . "<br>";
+$restaurant_image = $result->data[1]->mainPhoto->source . "<br>";;
+// $restaurant_type = $result->data[1]->;
+$restaurant_prix = $result->data[1]->priceRange . "<br>";;
+$restaurant_note = $result->data[1]->aggregateRatings->tripadvisor->ratingValue;
+
+echo $restaurant_nom;
+echo $restaurant_adresse;
+echo $restaurant_image;
+// echo $restaurant_type;
+echo $restaurant_prix;
+echo $restaurant_note;
+
+echo "<pre>";
+print_r($result->data[1]);
+echo "</pre>";
+
+
 
 die();
 // $file = file_get_contents("TEST_FILE.json");

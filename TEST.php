@@ -30,7 +30,7 @@ $result_restaurant = "";
 //-----------------------------------------------------------------------------
 //priceline
 $result_fly = "";
-//$result_fly = $api->api_call_priceline($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre, $voyage_hotel_class);
+$result_fly = $api->api_call_priceline($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre, $voyage_hotel_class);
 
 echo "<pre>";
 print_r($result_hotel);
@@ -44,9 +44,82 @@ echo "<pre>";
 print_r($result_fly);
 echo "</pre>";
 
+die();
+
 $file = file_get_contents("TEST_FILE.json");
 $result = json_decode($file);
 
+echo "<pre>";
+print_r($result);
+echo "</pre>";
+
+die();
+
+//status
+echo $result->getAirFlightDepartures->results->status;
+
+//number of travel
+echo $result->getAirFlightDepartures->results->result->itinerary_count;
+
+//fly
+echo $result->getAirFlightDepartures->results->result->itinerary_data[0];
+
+//price
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->price_details->baseline_total_fare;
+
+//airline
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->airline->name;
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->airline->logo;
+
+//departure
+//airport name
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->departure->airport->name;
+
+//date, time
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->departure->datetime->date_display;
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->departure->datetime->date;
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->departure->datetime->time_24h;
+
+//arrival
+//airport name
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->departure->airport->name;
+
+//date, time
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->departure->datetime->date_display;
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->departure->datetime->date;
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->departure->datetime->time_24h;
+
+//fly type
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->flight_data->flight_0->info->aircraft;
+
+//duration
+echo $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . "0"}->slice_data->slice_0->flight_data->flight_0->info->duration;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+die();
 echo "<pre>";
 print_r($result->getAirAutoComplete->results->getSolr->results->data->airport_data->airport_0->iata);
 echo "</pre>";

@@ -78,12 +78,58 @@ class Restaurant_information
 
 class Fly_information
 {
+    public $fly_price;
+    public $fly_airline_name;
+    public $fly_airline_logo;
+    public $fly_airport_departure_name;
+    public $fly_airport_departure_date_display;
+    public $fly_airport_departure_date;
+    public $fly_airport_departure_time;
+    public $fly_airport_arrival_name;
+    public $fly_airport_arrival_date_display;
+    public $fly_airport_arrival_date;
+    public $fly_airport_arrival_time;
+    public $fly_aircraft_type;
+    public $fly_duration;
+
+    public function __construct(
+        $fly_price,
+        $fly_airline_name,
+        $fly_airline_logo,
+        $fly_airport_departure_name,
+        $fly_airport_departure_date_display,
+        $fly_airport_departure_date,
+        $fly_airport_departure_time,
+        $fly_airport_arrival_name,
+        $fly_airport_arrival_date_display,
+        $fly_airport_arrival_date,
+        $fly_airport_arrival_time,
+        $fly_aircraft_type,
+        $fly_duration
+    ) {
+        $this->fly_price = $fly_price;
+        $this->fly_airline_name = $fly_airline_name;
+        $this->fly_airline_logo = $fly_airline_logo;
+        $this->fly_airport_departure_name = $fly_airport_departure_name;
+        $this->fly_airport_departure_date_display = $fly_airport_departure_date_display;
+        $this->fly_airport_departure_date = $fly_airport_departure_date;
+        $this->fly_airport_departure_time = $fly_airport_departure_time;
+        $this->fly_airport_arrival_name = $fly_airport_arrival_name;
+        $this->fly_airport_arrival_date_display = $fly_airport_arrival_date_display;
+        $this->fly_airport_arrival_date = $fly_airport_arrival_date;
+        $this->fly_airport_arrival_time = $fly_airport_arrival_time;
+        $this->fly_aircraft_type = $fly_aircraft_type;
+        $this->fly_duration = $fly_duration;
+    }
 }
 
 class Api
 {
     //api key
     private $key = "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a";
+    private $api_number_of_hotel = 10;
+    private $api_number_of_fly_departure_arrival = 10;
+    private $api_number_of_fly_arrival_departure = 10;
 
     /*
     --------------------------------------------------------------------------------------------------------------
@@ -201,7 +247,7 @@ class Api
         $hotel_information = [];
         $hotel_list = [];
 
-        for ($i = 0; $i < 10 /*count($location_id_hotel)*/; $i++) {
+        for ($i = 0; $i < $this->api_number_of_hotel /*count($location_id_hotel)*/; $i++) {
             $hotel_information = [];
 
             $curl = curl_init();
@@ -405,6 +451,8 @@ class Api
     {
         $return_result = "";
 
+        $fly_list = [];
+
         //------------------------------------------
         //call to get airport id
         //Auto complete
@@ -426,7 +474,7 @@ class Api
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "X-RapidAPI-Host: priceline-com-provider.p.rapidapi.com",
-                "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a"
+                $this->key,
             ],
         ]);
 
@@ -463,7 +511,7 @@ class Api
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "X-RapidAPI-Host: priceline-com-provider.p.rapidapi.com",
-                "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a"
+                $this->key,
             ],
         ]);
 
@@ -485,15 +533,14 @@ class Api
         //------------------------------------------
         //call to get fly arrival departure
         //Search (departures, one way)
-        $fly_list_departure_arrival = "";
-        $fly_list_arrival_departure = "";
+        $fly_list_departure_arrival = [];
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 
         curl_setopt_array($curl, [
-            CURLOPT_URL => "https://priceline-com-provider.p.rapidapi.com/v2/flight/departures?sid=iSiX639&departure_date=2022-06-21&adults=1&origin_airport_code=YWG&destination_airport_code=JFK",
+            CURLOPT_URL => "https://priceline-com-provider.p.rapidapi.com/v2/flight/departures?sid=iSiX639&departure_date=" . $voyage_date_aller . "&adults=" . $voyage_nombre_personne_adulte . "&children=" . $voyage_nombre_personne_enfant . "&origin_airport_code=" . $airport_id_departure . "&destination_airport_code=" . $airport_id_arrival . "",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING => "",
@@ -503,7 +550,7 @@ class Api
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "X-RapidAPI-Host: priceline-com-provider.p.rapidapi.com",
-                "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a"
+                $this->key,
             ],
         ]);
 
@@ -516,7 +563,116 @@ class Api
             echo "cURL Error #:" . $err;
         }
 
-        //$return_result = $response;
+        $result = json_decode($response);
+
+        if ($result->getAirFlightDepartures->results->status == "Success") {
+            for ($i = 0; $i < min($this->api_number_of_fly_departure_arrival, $result->getAirFlightDepartures->results->result->itinerary_count); $i++) {
+                $fly_price = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->price_details->baseline_total_fare;
+                $fly_airline_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->name;
+                $fly_airline_logo = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->logo;
+                $fly_airport_departure_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->airport->name;
+                $fly_airport_departure_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date_display;
+                $fly_airport_departure_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date;
+                $fly_airport_departure_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->time_24h;
+                $fly_airport_arrival_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->airport->name;
+                $fly_airport_arrival_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date_display;
+                $fly_airport_arrival_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date;
+                $fly_airport_arrival_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->time_24h;
+                $fly_aircraft_type = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->aircraft;
+                $fly_duration = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->duration;
+
+                $fly_list_departure_arrival[$i] = new Fly_information(
+                    $fly_price,
+                    $fly_airline_name,
+                    $fly_airline_logo,
+                    $fly_airport_departure_name,
+                    $fly_airport_departure_date_display,
+                    $fly_airport_departure_date,
+                    $fly_airport_departure_time,
+                    $fly_airport_arrival_name,
+                    $fly_airport_arrival_date_display,
+                    $fly_airport_arrival_date,
+                    $fly_airport_arrival_time,
+                    $fly_aircraft_type,
+                    $fly_duration
+                );
+            }
+        }
+
+        $fly_list[0] = $fly_list_departure_arrival;
+
+        //------------------------------------------
+        //call to get fly departure arrival
+        //Search (departures, one way)
+        $fly_list_arrival_departure = [];
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://priceline-com-provider.p.rapidapi.com/v2/flight/departures?sid=iSiX639&departure_date=" . $voyage_date_retour . "&adults=" . $voyage_nombre_personne_adulte . "&children=" . $voyage_nombre_personne_enfant . "&origin_airport_code=" . $airport_id_arrival . "&destination_airport_code=" . $airport_id_departure . "",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: priceline-com-provider.p.rapidapi.com",
+                $this->key,
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        }
+
+        $result = json_decode($response);
+
+        if ($result->getAirFlightDepartures->results->status == "Success") {
+            for ($i = 0; $i < min($this->api_number_of_fly_departure_arrival, $result->getAirFlightDepartures->results->result->itinerary_count); $i++) {
+                $fly_price = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->price_details->baseline_total_fare;
+                $fly_airline_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->name;
+                $fly_airline_logo = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->logo;
+                $fly_airport_departure_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->airport->name;
+                $fly_airport_departure_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date_display;
+                $fly_airport_departure_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date;
+                $fly_airport_departure_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->time_24h;
+                $fly_airport_arrival_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->airport->name;
+                $fly_airport_arrival_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date_display;
+                $fly_airport_arrival_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date;
+                $fly_airport_arrival_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->time_24h;
+                $fly_aircraft_type = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->aircraft;
+                $fly_duration = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->duration;
+
+                $fly_list_arrival_departure[$i] = new Fly_information(
+                    $fly_price,
+                    $fly_airline_name,
+                    $fly_airline_logo,
+                    $fly_airport_departure_name,
+                    $fly_airport_departure_date_display,
+                    $fly_airport_departure_date,
+                    $fly_airport_departure_time,
+                    $fly_airport_arrival_name,
+                    $fly_airport_arrival_date_display,
+                    $fly_airport_arrival_date,
+                    $fly_airport_arrival_time,
+                    $fly_aircraft_type,
+                    $fly_duration
+                );
+            }
+        }
+
+        $fly_list[1] = $fly_list_arrival_departure;
+
+        $return_result = $fly_list;
         return $return_result;
     }
 }

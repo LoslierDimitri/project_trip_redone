@@ -17,7 +17,7 @@
                     <div class="column">
                         <div class="row">
                             <div class="col-md-12 col-lg-12 mt-3 mb-3 d-flex justify-content-around">
-                                <img class="w-25" src="./public/svg/Picto-map.svg" alt="">
+                                <img class="w-25" src="../svg/Picto-map.svg" alt="">
                             </div>
                         </div>
                         <div class="row">

@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand mx-4 my-auto" href="/project_trip_redone/Controller/controller_main.php"><img
-                src="./public/svg/Logo.svg" alt=""></a>
+        <a class="navbar-brand mx-4 my-auto" href="/project_trip_redone/Controller/controller_main.php"><img 
+                src="/project_trip_redone/View/svg/Logo.svg" alt=""></a>
         <button class="navbar-toggler mx-4 py-3" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
             aria-label="Toggle navigation">
-            <span class="bg-none"><img src="./public/svg/Picto-menu-burger.svg" alt=""></span>
+            <span class="bg-none"><img src="/project_trip_redone/View/svg/Picto-menu-burger.svg" alt=""></span>
         </button>
         <div class="collapse navbar-collapse mt-2" id="navbarTogglerDemo01">
 
@@ -24,7 +24,7 @@
             <?php if (isset($_SESSION['pseudo']) && isset($_SESSION["mot_de_passe"])) { ?>
             <div class="login-logout">
                 <a href="my_account" class="/project_trip_redone/Controller/controller_connection.php"><img
-                        class="logo-login-logout" src="./public/svg/Picto-compte.svg" alt="">
+                        class="logo-login-logout" src="/project_trip_redone/View/svg/Picto-compte.svg" alt="">
                     <p class="text-login-logout">Mon compte</p>
                 </a>
             </div>
@@ -32,7 +32,7 @@
             <!-- Si la personne n'est pas connecté -->
             <div class="login-logout">
                 <a href="/project_trip_redone/Controller/controller_connection.php" class="container-login-logout"><img
-                        class="logo-login-logout" src="./public/svg/Picto-connexion-inscription.svg" alt="">
+                        class="logo-login-logout" src="/project_trip_redone/View/svg/Picto-connexion-inscription.svg" alt="">
                     <p class="text-login-logout">Se connecter/S'inscrire</p>
                 </a>
             </div>

@@ -128,8 +128,8 @@ class Api
     //api key
     private $key = "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a";
     private $api_number_of_hotel = 10;
-    private $api_number_of_fly_departure_arrival = 10;
-    private $api_number_of_fly_arrival_departure = 10;
+    private $api_number_of_fly_departure_arrival = 5;
+    private $api_number_of_fly_arrival_departure = 5;
 
     /*
     --------------------------------------------------------------------------------------------------------------
@@ -445,7 +445,24 @@ class Api
 
     return a table of fly with differents informations
     structure:
-    $result[ID]->restaurant_name;
+    $result[0] to get fly departure arrival
+    $result[1] to get fly arrival departure
+
+    $result[CODE]->[ID] to get a fly
+
+    $result[CODE]->[ID]->fly_price;
+    $result[CODE]->[ID]->fly_airline_name;
+    $result[CODE]->[ID]->fly_airline_logo;
+    $result[CODE]->[ID]->fly_airport_departure_name;
+    $result[CODE]->[ID]->fly_airport_departure_date_display;
+    $result[CODE]->[ID]->fly_airport_departure_date;
+    $result[CODE]->[ID]->fly_airport_departure_time;
+    $result[CODE]->[ID]->fly_airport_arrival_name;
+    $result[CODE]->[ID]->fly_airport_arrival_date_display;
+    $result[CODE]->[ID]->fly_airport_arrival_date;
+    $result[CODE]->[ID]->fly_airport_arrival_time;
+    $result[CODE]->[ID]->fly_aircraft_type;
+    $result[CODE]->[ID]->fly_duration;
     */
     public function api_call_priceline($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre)
     {
@@ -637,7 +654,7 @@ class Api
         $result = json_decode($response);
 
         if ($result->getAirFlightDepartures->results->status == "Success") {
-            for ($i = 0; $i < min($this->api_number_of_fly_departure_arrival, $result->getAirFlightDepartures->results->result->itinerary_count); $i++) {
+            for ($i = 0; $i < min($this->api_number_of_fly_arrival_departure, $result->getAirFlightDepartures->results->result->itinerary_count); $i++) {
                 $fly_price = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->price_details->baseline_total_fare;
                 $fly_airline_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->name;
                 $fly_airline_logo = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->logo;

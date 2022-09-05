@@ -76,8 +76,8 @@ class Restaurant_information
     }
 }
 
-class Fly_information{
-
+class Fly_information
+{
 }
 
 class Api
@@ -201,7 +201,7 @@ class Api
         $hotel_information = [];
         $hotel_list = [];
 
-        for ($i = 0; $i < count($location_id_hotel); $i++) {
+        for ($i = 0; $i < 10 /*count($location_id_hotel)*/; $i++) {
             $hotel_information = [];
 
             $curl = curl_init();
@@ -401,12 +401,122 @@ class Api
     structure:
     $result[ID]->restaurant_name;
     */
-    public function api_call_priceline()
+    public function api_call_priceline($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre)
     {
         $return_result = "";
 
+        //------------------------------------------
+        //call to get airport id
+        //Auto complete
+        $airport_id_departure = "";
+        $airport_id_arrival = "";
 
-        
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://priceline-com-provider.p.rapidapi.com/v2/flight/autoComplete?string=" . $voyage_lieu_depart . "&pois=true&cities=true&airports=true&regions=true&hotels=true",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: priceline-com-provider.p.rapidapi.com",
+                "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        }
+
+        $result = json_decode($response);
+
+        if ($result->getAirAutoComplete->results->status == "Success") {
+            $airport_id_departure = $result->getAirAutoComplete->results->getSolr->results->data->airport_data->airport_0->iata;
+        }
+
+        //------------------------------------------
+        //call to get fly departure arrival
+        //Search (departures, one way)
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://priceline-com-provider.p.rapidapi.com/v2/flight/autoComplete?string=" . $voyage_lieu_arrive . "&pois=true&cities=true&airports=true&regions=true&hotels=true",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: priceline-com-provider.p.rapidapi.com",
+                "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        }
+
+        $result = json_decode($response);
+
+        if ($result->getAirAutoComplete->results->status == "Success") {
+            $airport_id_arrival = $result->getAirAutoComplete->results->getSolr->results->data->airport_data->airport_0->iata;
+        }
+
+        //------------------------------------------
+        //call to get fly arrival departure
+        //Search (departures, one way)
+        $fly_list_departure_arrival = "";
+        $fly_list_arrival_departure = "";
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://priceline-com-provider.p.rapidapi.com/v2/flight/departures?sid=iSiX639&departure_date=2022-06-21&adults=1&origin_airport_code=YWG&destination_airport_code=JFK",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: priceline-com-provider.p.rapidapi.com",
+                "X-RapidAPI-Key: dc778f2d12msh7c92a95ca152ca5p1cdb13jsnbf43ea02095a"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        }
+
+        //$return_result = $response;
         return $return_result;
     }
 }

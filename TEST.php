@@ -29,6 +29,8 @@ $result_restaurant = "";
 
 //-----------------------------------------------------------------------------
 //priceline
+$result_fly = "";
+//$result_fly = $api->api_call_priceline($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre, $voyage_hotel_class);
 
 echo "<pre>";
 print_r($result_hotel);
@@ -38,12 +40,19 @@ echo "<pre>";
 print_r($result_restaurant);
 echo "</pre>";
 
+echo "<pre>";
+print_r($result_fly);
+echo "</pre>";
 
+$file = file_get_contents("TEST_FILE.json");
+$result = json_decode($file);
 
+echo "<pre>";
+print_r($result->getAirAutoComplete->results->getSolr->results->data->airport_data->airport_0->iata);
+echo "</pre>";
 
-
-
-
+echo $result->getAirAutoComplete->results->status;
+echo $result->getAirAutoComplete->results->getSolr->results->data->airport_data->airport_0->iata;
 
 
 

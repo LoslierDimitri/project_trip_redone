@@ -15,7 +15,7 @@
                         <button type="submit">Valider</button><br>
                     </div>
                 </form>
-                <a class="register-link" href="/project_trip_redone/View/component/form_registration.php">
+                <a class="register-link" href="/project_trip_redone/Controller/controller_registration.php">
                     <p>Pas de compte? Inscrivez-vous ici</p>
                 </a>
             </div>

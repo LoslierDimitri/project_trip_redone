@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/project_trip_redone/View/css/navbar.css">
     <link rel="stylesheet" href="/project_trip_redone/View/css/footer.css">
+
+    <link rel="stylesheet" href="/project_trip_redone/View/css/page_main.css">
     <title>Page main</title>
 </head>
 

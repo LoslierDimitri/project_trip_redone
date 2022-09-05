@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand mx-4 my-auto" href="/Project-trip"><img src="./public/svg/Logo.svg" alt=""></a>
+        <a class="navbar-brand mx-4 my-auto" href="/project_trip_redone/Controller/controller_main.php"><img
+                src="./public/svg/Logo.svg" alt=""></a>
         <button class="navbar-toggler mx-4 py-3" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -10,32 +11,32 @@
 
             <ul class="navbar-nav me-auto mb-2 ml-1 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="concept">Le concept</a>
+                    <a class="nav-link" href="/project_trip_redone/Controller/controller_concept.php">Le concept</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="destinations">Destinations</a>
+                    <a class="nav-link" href="#">Destinations</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Témoignages</a>
                 </li>
             </ul>
             <!-- Si la personne est connecté -->
-            <?php if (isset($_SESSION['pseudo']) && isset($_SESSION["mot_de_passe"])) : ?>
+            <?php if (isset($_SESSION['pseudo']) && isset($_SESSION["mot_de_passe"])) { ?>
             <div class="login-logout">
-                <a href="my_account" class="container-login-logout"><img class="logo-login-logout"
-                        src="./public/svg/Picto-compte.svg" alt="">
+                <a href="my_account" class="/project_trip_redone/Controller/controller_connection.php"><img
+                        class="logo-login-logout" src="./public/svg/Picto-compte.svg" alt="">
                     <p class="text-login-logout">Mon compte</p>
                 </a>
             </div>
+            <?php } else { ?>
             <!-- Si la personne n'est pas connecté -->
-            <?php else : ?>
             <div class="login-logout">
-                <a href="connexion" class="container-login-logout"><img class="logo-login-logout"
-                        src="./public/svg/Picto-connexion-inscription.svg" alt="">
+                <a href="/project_trip_redone/Controller/controller_connection.php" class="container-login-logout"><img
+                        class="logo-login-logout" src="./public/svg/Picto-connexion-inscription.svg" alt="">
                     <p class="text-login-logout">Se connecter/S'inscrire</p>
                 </a>
             </div>
-            <?php endif; ?>
+            <?php } ?>
         </div>
     </div>
 </nav>

@@ -13,34 +13,34 @@ For more information, please look at this pen's infos or ask me directly on Twit
 
 // France map functions start
 
-$("#arrondissements a").click(function () {
-  if ($(this).attr("xlink:href").substring(0, 1) == "#") {
-    var the_id = $(this).attr("xlink:href");
-    $("html, body").animate(
-      {
-        scrollTop: $(the_id).offset().top,
-      },
-      "slow"
-    );
-  }
-  return false;
-}); /**/
+// $("#arrondissements a").click(function () {
+//   if ($(this).attr("xlink:href").substring(0, 1) == "#") {
+//     var the_id = $(this).attr("xlink:href");
+//     $("html, body").animate(
+//       {
+//         scrollTop: $(the_id).offset().top,
+//       },
+//       "slow"
+//     );
+//   }
+//   return false;
+// }); /**/
 
-// Smoothscrolling for standards anchors
-$('a[href^="#"]').click(function () {
-  var the_id = $(this).attr("href");
-  $("html, body").animate(
-    {
-      scrollTop: $(the_id).offset().top,
-    },
-    "slow"
-  );
-  return false;
-});
+// // Smoothscrolling for standards anchors
+// $('a[href^="#"]').click(function () {
+//   var the_id = $(this).attr("href");
+//   $("html, body").animate(
+//     {
+//       scrollTop: $(the_id).offset().top,
+//     },
+//     "slow"
+//   );
+//   return false;
+// });
 
-function test(city_name) {
-  alert("test " + city_name);
-}
+// function test(city_name) {
+//   alert("test " + city_name);
+// }
 
 function display_panel(region_name, panel_name, details) {
   console.log(region_name);
@@ -52,14 +52,14 @@ function display_panel(region_name, panel_name, details) {
   let panel;
   let panel_details;
 
-  for (let i = 0; i < 13; i++) {
+  for (let i = 0; i < 17; i++) {
     zone = document.getElementById("region_name_" + (i + 1) + "");
     zone.setAttribute("fill", "#ffffff");
   }
   zone = document.getElementById(region_name);
   zone.setAttribute("fill", "#0FABDF");
 
-  for (let i = 0; i < 13; i++) {
+  for (let i = 0; i < 17; i++) {
     panel = document.getElementById("region_panel_" + (i + 1) + "");
     panel.classList.add("hidden_item");
   }

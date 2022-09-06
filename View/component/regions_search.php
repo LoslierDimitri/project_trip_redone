@@ -164,15 +164,15 @@
                     // include($path_new);
 
 
-                    $result_region_name = get_regions("noms", "images", "descriptions", "prix");
+                    // $result_region_name = get_regions("noms", "images", "descriptions", "prix");
 
                     for ($i = 1; $i < count($result_region_name) + 1; $i++) {
-                        $result_specialities_name = get_informations("specialities", "noms", $i);
-                        $result_specialities_images = get_informations("specialities", "images", $i);
-                        $result_specialities_descriptions = get_informations("specialities", "descriptions", $i);
-                        $result_visits_name = get_informations("visits", "noms", $i);
-                        $result_visits_images = get_informations("visits", "images", $i);
-                        $result_visits_descriptions = get_informations("visits", "descriptions", $i);
+                        // $result_specialities_name = get_informations("specialities", "noms", $i);
+                        // $result_specialities_images = get_informations("specialities", "images", $i);
+                        // $result_specialities_descriptions = get_informations("specialities", "descriptions", $i);
+                        // $result_visits_name = get_informations("visits", "noms", $i);
+                        // $result_visits_images = get_informations("visits", "images", $i);
+                        // $result_visits_descriptions = get_informations("visits", "descriptions", $i);
 
                         // echo "<pre>";
                         // print_r($result_region_name);

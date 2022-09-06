@@ -280,13 +280,31 @@ class Api
 
             $result = json_decode($response);
 
-            $hotel_information[0] = $result->data[0]->name;
-            $hotel_information[1] = $result->data[0]->address;
-            $hotel_information[2] = $result->data[0]->photo->images->original->url;
-            $hotel_information[3] = $result->data[0]->rating;
-            $hotel_information[4] = $result->data[0]->hotel_class;
-            $hotel_information[5] = $result->data[0]->phone;
-            $hotel_information[6] = $result->data[0]->price;
+            for ($x = 0; $x < 7; $x++) {
+                $hotel_information[$x] = "";
+            }
+
+            if (isset($result->data[0]->name)) {
+                $hotel_information[0] = $result->data[0]->name;
+            }
+            if (isset($result->data[0]->address)) {
+                $hotel_information[1] = $result->data[0]->address;
+            }
+            if (isset($result->data[0]->photo->images->original->url)) {
+                $hotel_information[2] = $result->data[0]->photo->images->original->url;
+            }
+            if (isset($result->data[0]->rating)) {
+                $hotel_information[3] = $result->data[0]->rating;
+            }
+            if (isset($result->data[0]->hotel_class)) {
+                $hotel_information[4] = $result->data[0]->hotel_class;
+            }
+            if (isset($result->data[0]->phone)) {
+                $hotel_information[5] = $result->data[0]->phone;
+            }
+            if (isset($result->data[0]->price)) {
+                $hotel_information[6] = $result->data[0]->price;
+            }
 
             $hotel_list[$i] = new Hotel_information($hotel_information[0], $hotel_information[1], $hotel_information[2], $hotel_information[3], $hotel_information[4], $hotel_information[5], $hotel_information[6]);
         }
@@ -424,11 +442,27 @@ class Api
 
         //get restaurant information
         for ($i = 0; $i < count($result->data); $i++) {
-            $restaurant_nom = $result->data[$i]->name;
-            $restaurant_adresse = $result->data[$i]->address->street;
-            $restaurant_image = $result->data[$i]->mainPhoto->source;
-            $restaurant_prix = $result->data[$i]->priceRange;
-            $restaurant_note = $result->data[$i]->aggregateRatings->tripadvisor->ratingValue;
+            $restaurant_nom = "";
+            $restaurant_adresse = "";
+            $restaurant_image = "";
+            $restaurant_prix = "";
+            $restaurant_note = "";
+
+            if (isset($result->data[$i]->name)) {
+                $restaurant_nom = $result->data[$i]->name;
+            }
+            if (isset($result->data[$i]->address->street)) {
+                $restaurant_adresse = $result->data[$i]->address->street;
+            }
+            if (isset($result->data[$i]->mainPhoto->source)) {
+                $restaurant_image = $result->data[$i]->mainPhoto->source;
+            }
+            if (isset($result->data[$i]->priceRange)) {
+                $restaurant_prix = $result->data[$i]->priceRange;
+            }
+            if (isset($result->data[$i]->aggregateRatings->tripadvisor->ratingValue)) {
+                $restaurant_note = $result->data[$i]->aggregateRatings->tripadvisor->ratingValue;
+            }
 
             $restaurant_list[$i] = new Restaurant_information($restaurant_nom, $restaurant_adresse, $restaurant_image, $restaurant_prix, $restaurant_note);
         }
@@ -584,19 +618,59 @@ class Api
 
         if ($result->getAirFlightDepartures->results->status == "Success") {
             for ($i = 0; $i < min($this->api_number_of_fly_departure_arrival, $result->getAirFlightDepartures->results->result->itinerary_count); $i++) {
-                $fly_price = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->price_details->baseline_total_fare;
-                $fly_airline_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->name;
-                $fly_airline_logo = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->logo;
-                $fly_airport_departure_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->airport->name;
-                $fly_airport_departure_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date_display;
-                $fly_airport_departure_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date;
-                $fly_airport_departure_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->time_24h;
-                $fly_airport_arrival_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->airport->name;
-                $fly_airport_arrival_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date_display;
-                $fly_airport_arrival_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date;
-                $fly_airport_arrival_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->time_24h;
-                $fly_aircraft_type = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->aircraft;
-                $fly_duration = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->duration;
+                $fly_price = "";
+                $fly_airline_name = "";
+                $fly_airline_logo = "";
+                $fly_airport_departure_name = "";
+                $fly_airport_departure_date_display = "";
+                $fly_airport_departure_date = "";
+                $fly_airport_departure_time = "";
+                $fly_airport_arrival_name = "";
+                $fly_airport_arrival_date_display = "";
+                $fly_airport_arrival_date = "";
+                $fly_airport_arrival_time = "";
+                $fly_aircraft_type = "";
+                $fly_duration = "";
+
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->price_details->baseline_total_fare)) {
+                    $fly_price = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->price_details->baseline_total_fare;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->name)) {
+                    $fly_airline_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->name;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->logo)) {
+                    $fly_airline_logo = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->logo;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->airport->name)) {
+                    $fly_airport_departure_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->airport->name;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date_display)) {
+                    $fly_airport_departure_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date_display;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date)) {
+                    $fly_airport_departure_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->time_24h)) {
+                    $fly_airport_departure_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->time_24h;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->airport->name)) {
+                    $fly_airport_arrival_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->airport->name;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date_display)) {
+                    $fly_airport_arrival_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date_display;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date)) {
+                    $fly_airport_arrival_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->time_24h)) {
+                    $fly_airport_arrival_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->time_24h;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->aircraft)) {
+                    $fly_aircraft_type = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->aircraft;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->duration)) {
+                    $fly_duration = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->duration;
+                }
 
                 $fly_list_departure_arrival[$i] = new Fly_information(
                     $fly_price,
@@ -655,19 +729,59 @@ class Api
 
         if ($result->getAirFlightDepartures->results->status == "Success") {
             for ($i = 0; $i < min($this->api_number_of_fly_arrival_departure, $result->getAirFlightDepartures->results->result->itinerary_count); $i++) {
-                $fly_price = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->price_details->baseline_total_fare;
-                $fly_airline_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->name;
-                $fly_airline_logo = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->logo;
-                $fly_airport_departure_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->airport->name;
-                $fly_airport_departure_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date_display;
-                $fly_airport_departure_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date;
-                $fly_airport_departure_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->time_24h;
-                $fly_airport_arrival_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->airport->name;
-                $fly_airport_arrival_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date_display;
-                $fly_airport_arrival_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date;
-                $fly_airport_arrival_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->time_24h;
-                $fly_aircraft_type = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->aircraft;
-                $fly_duration = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->duration;
+                $fly_price = "";
+                $fly_airline_name = "";
+                $fly_airline_logo = "";
+                $fly_airport_departure_name = "";
+                $fly_airport_departure_date_display = "";
+                $fly_airport_departure_date = "";
+                $fly_airport_departure_time = "";
+                $fly_airport_arrival_name = "";
+                $fly_airport_arrival_date_display = "";
+                $fly_airport_arrival_date = "";
+                $fly_airport_arrival_time = "";
+                $fly_aircraft_type = "";
+                $fly_duration = "";
+
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->price_details->baseline_total_fare)) {
+                    $fly_price = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->price_details->baseline_total_fare;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->name)) {
+                    $fly_airline_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->name;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->logo)) {
+                    $fly_airline_logo = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->airline->logo;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->airport->name)) {
+                    $fly_airport_departure_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->airport->name;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date_display)) {
+                    $fly_airport_departure_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date_display;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date)) {
+                    $fly_airport_departure_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->date;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->time_24h)) {
+                    $fly_airport_departure_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->departure->datetime->time_24h;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->airport->name)) {
+                    $fly_airport_arrival_name = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->airport->name;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date_display)) {
+                    $fly_airport_arrival_date_display = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date_display;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date)) {
+                    $fly_airport_arrival_date = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->date;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->time_24h)) {
+                    $fly_airport_arrival_time = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->arrival->datetime->time_24h;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->aircraft)) {
+                    $fly_aircraft_type = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->aircraft;
+                }
+                if (isset($result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->duration)) {
+                    $fly_duration = $result->getAirFlightDepartures->results->result->itinerary_data->{'itinerary_' . $i}->slice_data->slice_0->flight_data->flight_0->info->duration;
+                }
 
                 $fly_list_arrival_departure[$i] = new Fly_information(
                     $fly_price,

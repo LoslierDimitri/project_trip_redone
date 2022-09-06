@@ -187,8 +187,12 @@ class Api
         $result = json_decode($response);
 
         for ($i = 0; $i < count($result->data); $i++) {
-            if ($result->data[$i]->result_type == "geos") {
-                $location_id = $result->data[$i]->result_object->location_id;
+            if (isset($result->data[$i]->result_type)) {
+                if ($result->data[$i]->result_type == "geos") {
+                    if (isset($result->data[$i]->result_object->location_id)) {
+                        $location_id = $result->data[$i]->result_object->location_id;
+                    }
+                }
             }
         }
 
@@ -236,8 +240,12 @@ class Api
         $result = json_decode($response);
 
         for ($i = 0; $i < count($result->data); $i++) {
-            if ($result->data[$i]) {
-                $location_id_hotel[$i] = $result->data[$i]->location_id;
+            if (isset($result->data[$i])) {
+                if ($result->data[$i]) {
+                    if (isset($result->data[$i]->location_id)) {
+                        $location_id_hotel[$i] = $result->data[$i]->location_id;
+                    }
+                }
             }
         }
 
@@ -366,7 +374,9 @@ class Api
 
         $result = json_decode($response);
 
-        $location_id_google = $result->data->geolocation[0]->id->id;
+        if (isset($result->data->geolocation[0]->id->id)) {
+            $location_id_google = $result->data->geolocation[0]->id->id;
+        }
 
         //------------------------------------------
         //call to get location_id
@@ -403,7 +413,9 @@ class Api
 
         $result = json_decode($response);
 
-        $location_id = $result->id_city;
+        if (isset($result->id_city)) {
+            $location_id = $result->id_city;
+        }
 
         //------------------------------------------
         //call to get a list of restaurant
@@ -540,8 +552,12 @@ class Api
 
         $result = json_decode($response);
 
-        if ($result->getAirAutoComplete->results->status == "Success") {
-            $airport_id_departure = $result->getAirAutoComplete->results->getSolr->results->data->airport_data->airport_0->iata;
+        if (isset($result->getAirAutoComplete->results->status)) {
+            if ($result->getAirAutoComplete->results->status == "Success") {
+                if (isset($result->getAirAutoComplete->results->getSolr->results->data->airport_data->airport_0->iata)) {
+                    $airport_id_departure = $result->getAirAutoComplete->results->getSolr->results->data->airport_data->airport_0->iata;
+                }
+            }
         }
 
         //------------------------------------------
@@ -577,8 +593,12 @@ class Api
 
         $result = json_decode($response);
 
-        if ($result->getAirAutoComplete->results->status == "Success") {
-            $airport_id_arrival = $result->getAirAutoComplete->results->getSolr->results->data->airport_data->airport_0->iata;
+        if (isset($result->getAirAutoComplete->results->status)) {
+            if ($result->getAirAutoComplete->results->status == "Success") {
+                if (isset($result->getAirAutoComplete->results->getSolr->results->data->airport_data->airport_0->iata)) {
+                    $airport_id_arrival = $result->getAirAutoComplete->results->getSolr->results->data->airport_data->airport_0->iata;
+                }
+            }
         }
 
         //------------------------------------------

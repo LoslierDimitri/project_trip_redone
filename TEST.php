@@ -33,6 +33,15 @@ $result_restaurant = "";
 $result_fly = "";
 //$result_fly = $api->api_call_priceline($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre, $voyage_hotel_class);
 
+
+$path = $_SERVER["DOCUMENT_ROOT"];
+$path_new = $path . "/project_trip_redone/BACKUP_API_CALL_PHP.php";
+include($path_new);
+
+$result_hotel = get_api_call_backup_hotel();
+$result_restaurant = get_api_call_backup_restaurant();
+$result_fly = get_api_call_backup_fly();
+
 echo "<pre>";
 print_r($result_hotel);
 echo "</pre>";
@@ -543,13 +552,29 @@ $path = $_SERVER["DOCUMENT_ROOT"];
 $path_new = $path . "/project_trip_redone/BACKUP_API_CALL_PHP.php";
 include($path_new);
 
-$result = get_api_call_backup();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // $result = json_encode($result);
 
-echo "<pre>";
-print_r($result);
-echo "</pre>";
+// echo "<pre>";
+// print_r($result);
+// echo "</pre>";
 
 
 

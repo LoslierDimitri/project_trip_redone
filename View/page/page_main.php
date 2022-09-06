@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/project_trip_redone/View/css/navbar.css">
     <link rel="stylesheet" href="/project_trip_redone/View/css/footer.css">
     <link rel="stylesheet" href="./project_trip_redone/View/map.css">
-    <link rel="shortcut icon" type="image/x-icon" href="/project_trip_redone/View/png/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/project_trip_redone/View/ico/favicon.ico" />
     <link rel="stylesheet" href="/project_trip_redone/View/css/page_main.css">
     <title>Page main</title>
 </head>
@@ -35,9 +35,9 @@
     ?>
 
     <?php
-    // $path = $_SERVER["DOCUMENT_ROOT"];
-    // $path_new = $path . "/project_trip_redone/View/component/regions_search.php";
-    // include($path_new);
+    $path = $_SERVER["DOCUMENT_ROOT"];
+    $path_new = $path . "/project_trip_redone/View/component/regions_search.php";
+    include($path_new);
     ?>
 
     <?php
@@ -47,7 +47,7 @@
     ?>
 
 
-    <script src="/project_trip_redone/View/js/script.js"></script>
+    <script src="/project_trip_redone/View/script/script.js"></script>
 
 </body>
 

@@ -22,7 +22,7 @@ class Database
     //-------------------------------------------------------------------------------- private function
     private function set_connection()
     {
-        $database_name = "mysql:host=localhost;dbname=project_trip";
+        $database_name = "mysql:host=localhost;dbname=projet_trip";
         $database_username = "root";
         $database_password = "root";
 

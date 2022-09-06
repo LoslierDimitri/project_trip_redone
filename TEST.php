@@ -4,6 +4,7 @@ $path_new = $path . "/project_trip_redone/Model/Database.php";
 require($path_new);
 $database = new Database();
 
+
 $path = $_SERVER["DOCUMENT_ROOT"];
 $path_new = $path . "/project_trip_redone/Model/Api.php";
 require($path_new);

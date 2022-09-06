@@ -17,7 +17,7 @@
                     <div class="column">
                         <div class="row">
                             <div class="col-md-12 col-lg-12 mt-3 mb-3 d-flex justify-content-around">
-                                <img class="w-25" src="../svg/Picto-map.svg" alt="">
+                                <img class="w-25" src="/project_trip_redone/View/svg/Picto-map.svg" alt="">
                             </div>
                         </div>
                         <div class="row">
@@ -36,7 +36,7 @@
                     <div class="column">
                         <div class="row">
                             <div class="col-md-12 col-lg-12 mt-3 mb-3 d-flex justify-content-around">
-                                <img class="w-25" src="./public/svg/Picto-dates.svg" alt="">
+                                <img class="w-25" src="/project_trip_redone/View/svg/Picto-dates.svg" alt="">
                             </div>
                         </div>
                         <div class="row">
@@ -55,7 +55,7 @@
                     <div class="column">
                         <div class="row">
                             <div class="col-md-12 col-lg-12 mt-3 mb-3 d-flex justify-content-around">
-                                <img class="w-25" src="./public/svg/Picto-add-people.svg" alt="">
+                                <img class="w-25" src="/project_trip_redone/View/svg/Picto-add-people.svg" alt="">
                             </div>
                         </div>
                         <div class="row">
@@ -74,7 +74,7 @@
                     <div class="column">
                         <div class="row">
                             <div class="col-md-12 col-lg-12 mt-3 mb-3 d-flex justify-content-around">
-                                <img class="w-25" src="./public/svg/Picto-lit.svg" alt="">
+                                <img class="w-25" src="/project_trip_redone/View/svg/Picto-lit.svg" alt="">
                             </div>
                         </div>
                         <div class="row">

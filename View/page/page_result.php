@@ -84,6 +84,72 @@
     echo "</pre>";
     ?>
 
+    <section>
+        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+            <?php
+            for ($i = 0; $i < count($result_hotel); $i++) {
+            ?>
+
+                <input type="checkbox" id="result_hotel" name="" value="">
+                <label for="result_hotel">
+                    <div>
+                        <?php
+                        if (isset($result_hotel[$i]->hotel_name)) {
+                            $result_hotel[$i]->hotel_name;
+                        }
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+                        if (isset($result_class[$i]->hotel_class)){
+                            $result_class[$i]->hotel_class;
+                        }
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+                        if (isset($result_hotel[$i]->hotel_rate)){
+                            $result_hotel[$i]->hotel_rate;
+                        }
+                        ?>
+                    </div>
+                    <div>
+                        <img src="/project_trip_redone/View/png/Pointer.png" alt="">
+                        <?php
+                        if (isset($result_hotel[$i]->hotel_address)){
+                            $result_hotel[$i]->hotel_address;
+                        }
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+                        if (isset($result_hotel[$i]->hotel_phone)){
+                            $result_hotel[$i]->hotel_phone;
+                        }
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+                        if (isset($result_hotel[$i]->hotel_price)){
+                            $result_hotel[$i]->hotel_price;
+                        }
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+                        if (isset($result_hotel[$i]->hotel_image)){
+                            $result_hotel[$i]->hotel_image;
+                        }
+                        ?>
+                    </div>
+
+                </label>
+            <?php
+            }
+            ?>
+        </form>
+    </section>
+
     <?php
     $path = $_SERVER["DOCUMENT_ROOT"];
     $path_new = $path . "/project_trip_redone/View/component/footer.php";

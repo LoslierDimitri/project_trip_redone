@@ -1,6 +1,18 @@
 <?php
 /*
 this file is used to get a backup for api call
+
+how to use this file
+include this:
+----------------------------------------------
+$path = $_SERVER["DOCUMENT_ROOT"];
+$path_new = $path . "/project_trip_redone/BACKUP_API_CALL_PHP.php";
+include($path_new);
+
+$result_hotel = get_api_call_backup_hotel();
+$result_restaurant = get_api_call_backup_restaurant();
+$result_fly = get_api_call_backup_fly();
+----------------------------------------------
 */
 
 class Hotel_information_backup

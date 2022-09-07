@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="/project_trip_redone/View/css/navbar.css">
+    <link rel="stylesheet" href="/project_trip_redone/View/css/footer.css">
+    <link rel="stylesheet" href="/project_trip_redone/View/css/concept.css">
     <title>Page concept</title>
 </head>
 
@@ -23,14 +27,14 @@
     ?>
 
     <section class="banner">
-        <img src="./public/svg/img-concept.svg" alt="">
+        <img src="/project_trip_redone/View/svg/img-concept.svg" alt="">
     </section>
 
 
     <section class="w-100 d-flex justify-content-center">
         <div class="column w-50">
             <div class="title mt-5 mb-3">
-                <h3><img src="./public/svg/Logo-text.svg" alt="">, qu'est ce que c'est au juste?</h3>
+                <h3><img src="/project_trip_redone/View/svg/Logo-text.svg" alt="">, qu'est ce que c'est au juste?</h3>
             </div>
             <div class="contents mb-5">
                 <p class="text-dark text-justify">

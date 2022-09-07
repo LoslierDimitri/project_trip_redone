@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="/project_trip_redone/View/css/navbar.css">
+    <link rel="stylesheet" href="/project_trip_redone/View/css/footer.css">
+    <link rel="stylesheet" href="/project_trip_redone/View/css/page_404.css">
     <title>Page 404</title>
 </head>
 
@@ -29,7 +33,7 @@
     <h5>Nous somme désolé, mais la page que vous avez demandé n'est pas disponible</h5></div> -->
         <div class="d-flex justify-content-center container  text-center my-5">
             <div class="card-header" style="width: 18rem;">
-                <img src="./public/png/fast-food.png" class="card-img-top" alt="...">
+                <img src="/project_trip_redone/View/png/fast-food.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h2 class="card-title">404</h2>
                     <p class="card-text">Désolé, mais la page que vous avez demandé n'est pas disponible</p>

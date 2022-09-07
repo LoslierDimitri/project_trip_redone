@@ -8,10 +8,10 @@
 
             <ul class="navbar-nav me-auto mb-2 ml-1 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="concept">Le concept</a>
+                    <a class="nav-link" href="/project_trip_redone/View/page/page_concept.php">Le concept</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="destinations">Destinations</a>
+                    <a class="nav-link" href="/project_trip_redone/View/page/page_destinations.php">Destinations</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="temoignages">Témoignages</a>

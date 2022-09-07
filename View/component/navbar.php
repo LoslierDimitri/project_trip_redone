@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand mx-4 my-auto" href="/Project-trip"><img src="/project_trip_redone/View/svg/Logo.svg" alt=""></a>
+        <a class="navbar-brand mx-4 my-auto" href="/project_trip_redone/Controller/controller_main.php"><img src="/project_trip_redone/View/svg/Logo.svg" alt=""></a>
         <button class="navbar-toggler mx-4 py-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="bg-none"><img src="/project_trip_redone/View/svg/Picto-menu-burger.svg" alt=""></span>
         </button>

@@ -132,6 +132,7 @@
         </div>
     </div>
 </section>
+
 <section class="region_search">
     <div class="title mt-5 mb-5">
         <div class="column w-100">

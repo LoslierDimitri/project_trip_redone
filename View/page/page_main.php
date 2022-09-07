@@ -41,6 +41,13 @@
 
     <?php
     $path = $_SERVER["DOCUMENT_ROOT"];
+    $path_new = $path . "/project_trip_redone/View/component/slideshow.php";
+    include($path_new);
+    ?>
+
+
+    <?php
+    $path = $_SERVER["DOCUMENT_ROOT"];
     $path_new = $path . "/project_trip_redone/View/component/footer.php";
     include($path_new);
     ?>

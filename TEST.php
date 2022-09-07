@@ -33,14 +33,14 @@ $result_restaurant = "";
 $result_fly = "";
 //$result_fly = $api->api_call_priceline($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre, $voyage_hotel_class);
 
+/*
+$path = $_SERVER["DOCUMENT_ROOT"];
+$path_new = $path . "/project_trip_redone/BACKUP_API_CALL_PHP.php";
+include($path_new);
 
-// $path = $_SERVER["DOCUMENT_ROOT"];
-// $path_new = $path . "/project_trip_redone/BACKUP_API_CALL_PHP.php";
-// include($path_new);
-
-// $result_hotel = get_api_call_backup_hotel();
-// $result_restaurant = get_api_call_backup_restaurant();
-// $result_fly = get_api_call_backup_fly();
+$result_hotel = get_api_call_backup_hotel();
+$result_restaurant = get_api_call_backup_restaurant();
+$result_fly = get_api_call_backup_fly();
 
 echo "<pre>";
 print_r($result_hotel);
@@ -53,64 +53,44 @@ echo "</pre>";
 echo "<pre>";
 print_r($result_fly);
 echo "</pre>";
-
-
-//hotels
-
-$hotel_name = "Hotel de la Paix Tour Eiffel";
-$hotel_class = "3.0";
-$hotel_adress = "19 rue du Gros Caillou 07 Arr., 75007 Paris France";
-$hotel_image = "https://media-cdn.tripadvisor.com/media/photo-s/23/af/6e/73/exterior-view.jpg";
-$hotel_rate = "4.5";
-$hotel_phone = "01133145518617";
-$hotel_price = "$67 - $276";
-
-
-//resto
-
-$restaurant_name = "L'Echoppe de Paris -Charonne";
-$restaurant_address = "58 Boulevard Voltaire";
-$restaurant_image = "https://res.cloudinary.com/tf-lab/image/upload/restaurant/d6875a03-553b-486b-81d4-d652c3dcbd0c/037ddbb2-ed49-4645-bacd-2ec4b56f8c2b.jpg";
-$restaurant_price = "25";
-$restaurant_rate = "4.5";
-
-
-//vols aller
-
-$fly_price = "291.9";
-$fly_airline_name = "Iberia";
-$fly_airline_logo = "https://secure.rezserver.com/public/media/img/air_logos2/IB.png";
-$fly_airport_departure_name = "Merignac Airport";
-$fly_airport_departure_date_display = "Monday, October 3rd, 2022";
-$fly_airport_departure_date = "2022-10-03";
-$fly_airport_departure_time = "09:15";
-$fly_airport_arrival_name = "Charles De Gaulle (Roissy) Airport";
-$fly_airport_arrival_date_display = "Tuesday, October 4th, 2022";
-$fly_airport_arrival_date = "2022-10-04";
-$fly_airport_arrival_time = "10:20";
-$fly_aircraft_type = "Canadair Bombardier Regional Jet 1000";
-$fly_duration = "00:01:25";
+*/
 
 
 
-//vols retour
 
 
-$fly_price = "490.5";
-$fly_airline_name = "Lufthansa";
-$fly_airline_logo = "https://secure.rezserver.com/public/media/img/air_logos2/LH.png";
-$fly_airport_departure_name = "Charles De Gaulle (Roissy) Airport";
-$fly_airport_departure_date_display = "Friday, October 7th, 2022";
-$fly_airport_departure_date = "2022-10-07";
-$fly_airport_departure_time = "07:30";
-$fly_airport_arrival_name = "Merignac Airport";
-$fly_airport_arrival_date_display = "Friday, October 7th, 2022";
-$fly_airport_arrival_date = "2022-10-07";
-$fly_airport_arrival_time = "17:50";
-$fly_aircraft_type = "Airbus A320neo";
-$fly_duration = "00:01:15";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST["test_a"])) {
+        print_r($_POST["test_a"]);
+    }
+    if (isset($_POST["test_b"])) {
+        print_r($_POST["test_b"]);
+    }
+
+    echo "<pre>";
+    var_dump($_POST);
+    echo "</pre>";
+}
+
 
 ?>
+
+<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+    <input type="checkbox" name="test_a[]" value="test_a_1">
+    <label for="">test_a_1</label><br>
+    <input type="checkbox" name="test_a[]" value="test_a_2">
+    <label for="">test_a_2</label><br>
+
+    <input type="checkbox" name="test_b[]" value="<?php
+                                                    $val = "10";
+                                                    echo $val; ?>">
+    <label for="">test_b_1</label><br>
+    <input type="checkbox" name="test_b[]" value="test_b_2">
+    <label for="">test_b_2</label><br>
+
+    <button type="submit">submit</button>
+</form>
 
 <?php
 
@@ -129,11 +109,11 @@ $fly_duration = "00:01:15";
 
 
 
-die();
 
-$path = $_SERVER["DOCUMENT_ROOT"];
-$path_new = $path . "/project_trip_redone/BACKUP_API_CALL_PHP.php";
-include($path_new);
+
+
+
+
 
 
 
@@ -189,7 +169,7 @@ include($path_new);
 
 
 
-die();
+/*
 
 $file = file_get_contents("BACKUP_API_CALL.txt");
 $result = json_encode($file, JSON_FORCE_OBJECT);
@@ -199,7 +179,7 @@ echo "<pre>";
 print_r($result);
 echo "</pre>";
 
-die();
+
 
 $file = file_get_contents("TEST_FILE.json");
 $result = json_decode($file);
@@ -377,3 +357,4 @@ die();
 // echo "<pre>";
 // print_r($hotel_prix);
 // echo "</pre>";  
+*/

@@ -6,7 +6,7 @@
 
     <div class="form_content">
         <div class="form_info">
-            <label for="result_hotel">
+            <label for="result_user_hotel">
                 <div class="name_class">
                     <?php
                         if (isset($result_hotel[$i]->hotel_name)) {
@@ -89,21 +89,24 @@
 
             </label>
         </div>
-        <input type="checkbox" id="result_hotel" name="" value="">
+        <input type="checkbox" name="result_user_hotel[]" value="<?php
+                                                                        $var_result_hotel_user = [
+                                                                            "hotel_name" => $result_hotel[$i]->hotel_name,
+                                                                            "hotel_class" => $result_hotel[$i]->hotel_class,
+                                                                            "hotel_rate" => $result_hotel[$i]->hotel_rate,
+                                                                            "hotel_address" => $result_hotel[$i]->hotel_address,
+                                                                            "hotel_phone" => $result_hotel[$i]->hotel_phone,
+                                                                            "hotel_price" => $result_hotel[$i]->hotel_price,
+                                                                            "hotel_image" => $result_hotel[$i]->hotel_image
+                                                                        ];
+                                                                        // $var = $result_hotel[$i]->hotel_price;
+                                                                        print_r($var_result_hotel_user); ?>">
     </div>
     <?php
+        print_r($result_hotel[$i]);
     }
     ?>
 
-    <?php
-
-
-
-
-
-
-
-    ?>
 
     <h4>Restaurants</h4>
     <?php
@@ -178,19 +181,19 @@
 
             </label>
         </div>
-        <input type="checkbox" id="result_hotel" name="" value="">
+        <input type="checkbox" name="result_user_restaurant[]" value="<?php
+                                                                            $var_result_restaurant_user = [
+                                                                                "restaurant_name" => $result_restaurant[$i]->restaurant_name,
+                                                                                "restaurant_rate" => $result_restaurant[$i]->restaurant_rate,
+                                                                                "restaurant_address" => $result_restaurant[$i]->restaurant_address,
+                                                                                "restaurant_image" => $result_restaurant[$i]->restaurant_image,
+                                                                                "restaurant_price" => $result_restaurant[$i]->restaurant_price
+                                                                            ];
+                                                                            // $var = $result_hotel[$i]->hotel_price;
+                                                                            print_r($var_result_restaurant_user); ?>">
     </div>
     <?php
     }
-    ?>
-
-    <?php
-
-
-
-
-
-
     ?>
 
 
@@ -302,19 +305,25 @@
                 </div>
         </div>
         </label>
-        <input type="checkbox" id="result_hotel" name="" value="">
+        <input type="checkbox" name="result_user_fly_departure_arrival[]"
+            value="<?php
+                                                                                        $var_result_fly_departure_arrival_user = [
+                                                                                            "fly_airline_logo" => $result_fly[0][$i]->fly_airline_logo,
+                                                                                            "fly_airline_name" => $result_fly[0][$i]->fly_airline_name,
+                                                                                            "fly_airport_departure_date" => $result_fly[0][$i]->fly_airport_departure_date,
+                                                                                            "fly_airport_departure_time" => $result_fly[0][$i]->fly_airport_departure_time,
+                                                                                            "fly_airport_departure_name" => $result_fly[0][$i]->fly_airport_departure_name,
+                                                                                            "fly_airport_arrival_date" => $result_fly[0][$i]->fly_airport_arrival_date,
+                                                                                            "fly_airport_arrival_time" => $result_fly[0][$i]->fly_airport_arrival_time,
+                                                                                            "fly_airport_arrival_name" => $result_fly[0][$i]->fly_airport_arrival_name,
+                                                                                            "fly_duration" => $result_fly[0][$i]->fly_duration,
+                                                                                            "fly_price" => $result_fly[0][$i]->fly_price
+                                                                                        ];
+                                                                                        // $var = $result_hotel[$i]->hotel_price;
+                                                                                        print_r($var_result_fly_departure_arrival_user); ?>">
     </div>
     <?php
     }
-    ?>
-
-    <?php
-
-
-
-
-
-
     ?>
 
 
@@ -426,7 +435,22 @@
                 </div>
         </div>
         </label>
-        <input type="checkbox" id="result_hotel" name="" value="">
+        <input type="checkbox" name="result_user_fly_arrival_departure[]"
+            value="<?php
+                                                                                        $var_result_fly_arrival_departure_user = [
+                                                                                            "fly_airline_logo" => $result_fly[1][$i]->fly_airline_logo,
+                                                                                            "fly_airline_name" => $result_fly[1][$i]->fly_airline_name,
+                                                                                            "fly_airport_departure_date" => $result_fly[1][$i]->fly_airport_departure_date,
+                                                                                            "fly_airport_departure_time" => $result_fly[1][$i]->fly_airport_departure_time,
+                                                                                            "fly_airport_departure_name" => $result_fly[1][$i]->fly_airport_departure_name,
+                                                                                            "fly_airport_arrival_date" => $result_fly[1][$i]->fly_airport_arrival_date,
+                                                                                            "fly_airport_arrival_time" => $result_fly[1][$i]->fly_airport_arrival_time,
+                                                                                            "fly_airport_arrival_name" => $result_fly[1][$i]->fly_airport_arrival_name,
+                                                                                            "fly_duration" => $result_fly[1][$i]->fly_duration,
+                                                                                            "fly_price" => $result_fly[1][$i]->fly_price
+                                                                                        ];
+                                                                                        // $var = $result_hotel[$i]->hotel_price;
+                                                                                        print_r($var_result_fly_arrival_departure_user); ?>">
     </div>
     <?php
     }

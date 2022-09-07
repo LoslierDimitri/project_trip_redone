@@ -28,6 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result_user_fly_departure_arrival = $_POST["result_user_fly_departure_arrival"];
     $result_user_fly_arrival_departure = $_POST["result_user_fly_arrival_departure"];
 
-    echo "test";
+    echo "<pre>";
+    print_r($result_user_hotel);
+    print_r($result_user_restaurant);
+    print_r($result_user_fly_departure_arrival);
+    print_r($result_user_fly_arrival_departure);
+    echo "</pre>";
+    // $result_hidden = $_POST["test"];
+    // print_r($result_hidden);
+
+    // echo "<pre>";
+    // var_dump($_POST);
+    // echo "</pre>";
 }
 ?>

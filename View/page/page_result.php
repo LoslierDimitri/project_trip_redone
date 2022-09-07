@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/project_trip_redone/View/css/page_result.css">
+    <link rel="stylesheet" href="/project_trip_redone/View/css/navbar.css">
+    <link rel="stylesheet" href="/project_trip_redone/View/css/footer.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <title>Page result</title>
 </head>
 
@@ -19,6 +23,11 @@
     <?php
     $path = $_SERVER["DOCUMENT_ROOT"];
     $path_new = $path . "/project_trip_redone/View/component/all_controller.php";
+    include($path_new);
+    ?>
+    <?php
+    $path = $_SERVER["DOCUMENT_ROOT"];
+    $path_new = $path . "/project_trip_redone/View/component/form_result.php";
     include($path_new);
     ?>
 
@@ -124,15 +133,16 @@
     $result_fly[1][ID]->fly_aircraft_type
     $result_fly[1][ID]->fly_duration
     */
-    echo "<pre>";
-    print_r($result_hotel);
-    echo "</pre>";
-    echo "<pre>";
-    print_r($result_restaurant);
-    echo "</pre>";
-    echo "<pre>";
-    print_r($result_fly);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($result_hotel);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($result_restaurant);
+    // echo "</pre>";
+    // echo "<pre>";
+    // print_r($result_fly);
+    // echo "</pre>";
+    /*
     ?>
 
     <section>
@@ -200,7 +210,8 @@
             ?>
         </form>
     </section>
-
+*/
+?>
     <?php
     $path = $_SERVER["DOCUMENT_ROOT"];
     $path_new = $path . "/project_trip_redone/View/component/footer.php";

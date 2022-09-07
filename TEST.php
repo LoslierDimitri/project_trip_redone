@@ -34,13 +34,13 @@ $result_fly = "";
 //$result_fly = $api->api_call_priceline($voyage_lieu_depart, $voyage_lieu_arrive, $voyage_date_aller, $voyage_date_retour, $voyage_nombre_personne_adulte, $voyage_nombre_personne_enfant, $voyage_nombre_chambre, $voyage_hotel_class);
 
 
-$path = $_SERVER["DOCUMENT_ROOT"];
-$path_new = $path . "/project_trip_redone/BACKUP_API_CALL_PHP.php";
-include($path_new);
+// $path = $_SERVER["DOCUMENT_ROOT"];
+// $path_new = $path . "/project_trip_redone/BACKUP_API_CALL_PHP.php";
+// include($path_new);
 
-$result_hotel = get_api_call_backup_hotel();
-$result_restaurant = get_api_call_backup_restaurant();
-$result_fly = get_api_call_backup_fly();
+// $result_hotel = get_api_call_backup_hotel();
+// $result_restaurant = get_api_call_backup_restaurant();
+// $result_fly = get_api_call_backup_fly();
 
 echo "<pre>";
 print_r($result_hotel);
@@ -55,6 +55,8 @@ print_r($result_fly);
 echo "</pre>";
 
 
+//hotels
+
 $hotel_name = "Hotel de la Paix Tour Eiffel";
 $hotel_class = "3.0";
 $hotel_adress = "19 rue du Gros Caillou 07 Arr., 75007 Paris France";
@@ -64,107 +66,7 @@ $hotel_phone = "01133145518617";
 $hotel_price = "$67 - $276";
 
 
-
-?>
-<link rel="stylesheet" href="/project_trip_redone/View/css/page_result.css">
-<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-    <?php
-    for ($i = 0; $i < 2; $i++) {
-    ?>
-
-        <div class="form_content">
-            <div class="form_info">
-                <label for="result_hotel">
-                    <div class="name_class">
-                        <?php
-                        if (isset($hotel_name)) {
-                        ?>
-                            <p><?php echo $hotel_name; ?>
-                                <?php
-                                if (isset($hotel_class)) {
-                                ?>
-                                    <?php echo $hotel_class; ?></p>
-                        <?php
-                                }
-                        ?>
-                    <?php
-                        }
-                    ?>
-
-
-                    <div class="rate">
-                        <p>Note</p>
-                        <div class="rate_level">
-                            <?php
-                            if (isset($hotel_rate)) {
-                            ?>
-                                <p><?php echo $hotel_rate; ?></p>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    </div>
-                    <div>
-                        <div class="adress">
-                            <?php
-                            if (isset($hotel_adress)) {
-                            ?>
-                                <img src="/project_trip_redone/View/png/Pointer.png" alt="">
-                                <p> <?php
-                                    echo $hotel_adress; ?></p>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div>
-                        <?php
-                        if (isset($hotel_phone)) {
-                        ?>
-                            <p><?php echo $hotel_phone; ?></p>
-                        <?php
-                        }
-                        ?>
-                    </div>
-                    <div class="photo_price">
-                        <div>
-                            <?php
-                            if (isset($hotel_image)) {
-                            ?>
-                                <img class="place_image" src=<?= $hotel_image ?> alt="">
-                            <?php
-                            }
-                            ?>
-                        </div>
-                        <div class="price">
-                            <?php
-                            if (isset($hotel_price)) {
-                            ?>
-                                <p>Tarif dès</p>
-                                <div class="price_level">
-                                    <p><?php
-                                        echo $hotel_price;
-                                        ?></p>
-                                </div>
-                                <p>par nuit</p>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-
-
-                </label>
-            </div>
-            <input type="checkbox" id="result_hotel" name="" value="">
-        </div>
-    <?php
-    }
-    ?>
-</form>
-<?php
-
+//resto
 
 $restaurant_name = "L'Echoppe de Paris -Charonne";
 $restaurant_address = "58 Boulevard Voltaire";
@@ -173,91 +75,7 @@ $restaurant_price = "25";
 $restaurant_rate = "4.5";
 
 
-
-
-?>
-
-<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-    <?php
-    for ($i = 0; $i < 2; $i++) {
-    ?>
-
-        <div class="form_content">
-            <div class="form_info">
-                <label for="result_restaurant">
-                    <div class="name_class">
-                        <?php
-                        if (isset($restaurant_name)) {
-                        ?>
-                            <p><?php echo $restaurant_name; ?></p>
-                        <?php
-                        }
-                        ?>
-                        <div class="rate">
-                            <p>Note</p>
-                            <div class="rate_level">
-                                <?php
-                                if (isset($restaurant_rate)) {
-                                ?>
-                                    <p><?php echo $restaurant_rate; ?></p>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="adress">
-                            <?php
-                            if (isset($restaurant_address)) {
-                            ?>
-                                <img src="/project_trip_redone/View/png/Pointer.png" alt="">
-                                <p> <?php
-                                    echo $restaurant_address; ?></p>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div class="photo_price">
-                        <div>
-                            <?php
-                            if (isset($restaurant_image)) {
-                            ?>
-                                <img class="place_image" src=<?= $restaurant_image ?> alt="">
-                            <?php
-                            }
-                            ?>
-                        </div>
-                        <div class="price">
-                            <?php
-                            if (isset($restaurant_price)) {
-                            ?>
-                                <p>Tarif dès</p>
-                                <div class="price_level">
-                                    <p>$<?php
-                                        echo $restaurant_price;
-                                        ?>
-                                    </p>
-                                </div>
-                                <p>par nuit</p>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-
-
-                </label>
-            </div>
-            <input type="checkbox" id="result_hotel" name="" value="">
-        </div>
-    <?php
-    }
-    ?>
-</form>
-<?php
-
+//vols aller
 
 $fly_price = "291.9";
 $fly_airline_name = "Iberia";
@@ -275,125 +93,8 @@ $fly_duration = "00:01:25";
 
 
 
+//vols retour
 
-?>
-
-<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-    <?php
-    for ($i = 0; $i < 2; $i++) {
-    ?>
-        <h4>Départ</h4>
-        <div class="form_content">
-            <div class="form_info_fly">
-                <label for="result_fly_goings">
-                    <div class="fly">
-                        <div class="airline">
-                            <?php
-                            if (isset($fly_airline_logo)) {
-                            ?>
-                                <img class="airline_logo" src="<?php echo $fly_airline_logo; ?>" alt="">
-                            <?php
-                            }
-                            ?>
-                            <?php
-                            if (isset($fly_airline_name)) {
-                            ?>
-                                <p><?php echo $fly_airline_name; ?></p>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                        <div class="date_time_airport">
-                            <div class="departure">
-                                <?php
-                                if (isset($fly_airport_departure_date)) {
-                                ?>
-                                    <p><?php
-                                        echo $fly_airport_departure_date
-                                        ?></p>
-                                <?php
-                                }
-                                ?>
-                                <?php
-                                if (isset($fly_airport_departure_time)) {
-                                ?>
-                                    <p><?php
-                                        echo $fly_airport_departure_time
-                                        ?></p>
-                                <?php
-                                }
-                                ?>
-                                <?php
-                                if (isset($fly_airport_departure_name)) {
-                                ?>
-                                    <p><?php echo $fly_airport_departure_name ?></p>
-                                <?php
-                                }
-                                ?>
-                            </div>
-
-                            <div class="arrival">
-                                <?php
-                                if (isset($fly_airport_arrival_date)) {
-                                ?>
-                                    <p><?php
-                                        echo $fly_airport_arrival_date
-                                        ?></p>
-                                <?php
-                                }
-                                ?>
-                                <?php
-                                if (isset($fly_airport_arrival_time)) {
-                                ?>
-                                    <p><?php
-                                        echo $fly_airport_arrival_time
-                                        ?></p>
-                                <?php
-                                }
-                                ?>
-                                <?php
-                                if (isset($fly_airport_arrival_name)) {
-                                ?>
-                                    <p><?php echo $fly_airport_arrival_name ?></p>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <div class="duration_price">
-                            <div class="duration">
-                                <?php
-                                if (isset($fly_duration)) {
-                                ?>
-                                    <p>Temps</p>
-                                    <p> <?php
-                                        echo $fly_duration; ?></p>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                            <div class="price">
-                                <?php
-                                if (isset($fly_price)) {
-                                ?>
-                                    <p>Prix</p>
-                                    <p>$<?php
-                                        echo $fly_price; ?></p>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            </label>
-            <input type="checkbox" id="result_hotel" name="" value="">
-        </div>
-    <?php
-    }
-    ?>
-</form>
-<?php
 
 $fly_price = "490.5";
 $fly_airline_name = "Lufthansa";
@@ -409,126 +110,8 @@ $fly_airport_arrival_time = "17:50";
 $fly_aircraft_type = "Airbus A320neo";
 $fly_duration = "00:01:15";
 
-
-
-
 ?>
 
-<form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-    <?php
-    for ($i = 0; $i < 2; $i++) {
-    ?>
-        <h4>Retour</h4>
-        <div class="form_content">
-            <div class="form_info_fly">
-                <label for="result_fly_goings">
-                    <div class="fly">
-                        <div class="airline">
-                            <?php
-                            if (isset($fly_airline_logo)) {
-                            ?>
-                                <img class="airline_logo" src="<?php echo $fly_airline_logo; ?>" alt="">
-                            <?php
-                            }
-                            ?>
-                            <?php
-                            if (isset($fly_airline_name)) {
-                            ?>
-                                <p><?php echo $fly_airline_name; ?></p>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                        <div class="date_time_airport">
-                            <div class="departure">
-                                <?php
-                                if (isset($fly_airport_departure_date)) {
-                                ?>
-                                    <p><?php
-                                        echo $fly_airport_departure_date
-                                        ?></p>
-                                <?php
-                                }
-                                ?>
-                                <?php
-                                if (isset($fly_airport_departure_time)) {
-                                ?>
-                                    <p><?php
-                                        echo $fly_airport_departure_time
-                                        ?></p>
-                                <?php
-                                }
-                                ?>
-                                <?php
-                                if (isset($fly_airport_departure_name)) {
-                                ?>
-                                    <p><?php echo $fly_airport_departure_name ?></p>
-                                <?php
-                                }
-                                ?>
-                            </div>
-
-                            <div class="arrival">
-                                <?php
-                                if (isset($fly_airport_arrival_date)) {
-                                ?>
-                                    <p><?php
-                                        echo $fly_airport_arrival_date
-                                        ?></p>
-                                <?php
-                                }
-                                ?>
-                                <?php
-                                if (isset($fly_airport_arrival_time)) {
-                                ?>
-                                    <p><?php
-                                        echo $fly_airport_arrival_time
-                                        ?></p>
-                                <?php
-                                }
-                                ?>
-                                <?php
-                                if (isset($fly_airport_arrival_name)) {
-                                ?>
-                                    <p><?php echo $fly_airport_arrival_name ?></p>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <div class="duration_price">
-                            <div class="duration">
-                                <?php
-                                if (isset($fly_duration)) {
-                                ?>
-                                    <p>Temps</p>
-                                    <p> <?php
-                                        echo $fly_duration; ?></p>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                            <div class="price">
-                                <?php
-                                if (isset($fly_price)) {
-                                ?>
-                                    <p>Prix</p>
-                                    <p>$<?php
-                                        echo $fly_price; ?></p>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            </label>
-            <input type="checkbox" id="result_hotel" name="" value="">
-        </div>
-    <?php
-    }
-    ?>
-</form>
 <?php
 
 

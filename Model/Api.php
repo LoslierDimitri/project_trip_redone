@@ -186,6 +186,7 @@ class Api
 
         $result = json_decode($response);
 
+        if(isset($result->data)){
         for ($i = 0; $i < count($result->data); $i++) {
             if (isset($result->data[$i]->result_type)) {
                 if ($result->data[$i]->result_type == "geos") {
@@ -195,6 +196,7 @@ class Api
                 }
             }
         }
+    }
 
         //------------------------------------------
         //call to get a list of hotel
@@ -239,11 +241,13 @@ class Api
 
         $result = json_decode($response);
 
-        for ($i = 0; $i < count($result->data); $i++) {
-            if (isset($result->data[$i])) {
-                if ($result->data[$i]) {
-                    if (isset($result->data[$i]->location_id)) {
-                        $location_id_hotel[$i] = $result->data[$i]->location_id;
+        if (isset($result->data)) {
+            for ($i = 0; $i < count($result->data); $i++) {
+                if (isset($result->data[$i])) {
+                    if ($result->data[$i]) {
+                        if (isset($result->data[$i]->location_id)) {
+                            $location_id_hotel[$i] = $result->data[$i]->location_id;
+                        }
                     }
                 }
             }

@@ -56,6 +56,7 @@ input::after {
 
 .rate p {
   margin: 0 10px;
+  color: white;
 }
 
 .rate_level {
@@ -95,8 +96,8 @@ input::after {
   margin: 0;
 }
 
-.price_level {
-  font-size: 1.2rem;
+span p {
+  font-size: 1.3rem;
   color: #ed6e38;
 }
 
@@ -107,15 +108,28 @@ p {
 .form_info_fly {
   border: 2px solid #0fabdf;
   padding: 10px;
-  min-width: 800px;
+  min-width: 900px;
+  display: flex;
 }
 
 .fly {
   display: flex;
 }
 
+.fly_content {
+  width: 100%;
+  justify-content: space-between;
+}
+
 .airline {
   display: flex;
+  align-items: center;
+}
+
+.airline p {
+  display: flex;
+  align-items: center;
+  margin: 0 20px 0 10px;
 }
 
 .departure {
@@ -190,6 +204,7 @@ button {
   border-radius: 10px;
   padding: 10px 20px;
   font-family: Signika-Regular;
+  margin-bottom: 20px;
 }
 
 button:hover {

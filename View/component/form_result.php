@@ -1,12 +1,12 @@
 <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-<h4>Hôtels</h4>
+    <h4>Hôtels</h4>
     <?php
     for ($i = 0; $i < count($result_hotel); $i++) {
     ?>
 
         <div class="form_content">
             <div class="form_info">
-                <label for="result_hotel">
+                <label for="result_hotel" class="w-100">
                     <div class="name_class">
                         <?php
                         if (isset($result_hotel[$i]->hotel_name)) {
@@ -74,11 +74,11 @@
                             if (isset($result_hotel[$i]->hotel_price)) {
                             ?>
                                 <p>Tarif dès</p>
-                                <div class="price_level">
+                                <span class="price_level">
                                     <p><?php
                                         echo $result_hotel[$i]->hotel_price;
                                         ?></p>
-                                </div>
+                                </span>
                                 <p>par nuit</p>
                             <?php
                             }
@@ -95,7 +95,7 @@
     }
     ?>
 
-<?php
+    <?php
 
 
 
@@ -103,16 +103,16 @@
 
 
 
-?>
+    ?>
 
-<h4>Restaurants</h4>
+    <h4>Restaurants</h4>
     <?php
     for ($i = 0; $i < count($result_restaurant); $i++) {
     ?>
 
         <div class="form_content">
             <div class="form_info">
-                <label for="result_restaurant">
+                <label for="result_restaurant" class="w-100">
                     <div class="name_class">
                         <?php
                         if (isset($result_restaurant[$i]->restaurant_name)) {
@@ -162,12 +162,12 @@
                             if (isset($result_restaurant[$i]->restaurant_price)) {
                             ?>
                                 <p>Tarif dès</p>
-                                <div class="price_level">
+                                <span class="price_level">
                                     <p>$<?php
                                         echo $result_restaurant[$i]->restaurant_price;
                                         ?>
                                     </p>
-                                </div>
+                                </span>
                                 <p>par nuit</p>
                             <?php
                             }
@@ -184,29 +184,31 @@
     }
     ?>
 
-<?php
+    <?php
 
 
 
 
 
 
-?>
+    ?>
 
 
-<h4>Départ</h4>
+    <h4>Départ</h4>
     <?php
     for ($i = 0; $i < count($result_fly[0]); $i++) {
     ?>
         <div class="form_content">
             <div class="form_info_fly">
-                <label for="result_fly_goings">
+                <label class="fly_content" for="result_fly_goings">
                     <div class="fly">
                         <div class="airline">
                             <?php
                             if (isset($result_fly[0][$i]->fly_airline_logo)) {
                             ?>
-                                <img class="airline_logo" src="<?php echo $result_fly[0][$i]->fly_airline_logo; ?>" alt="">
+                                <div>
+                                    <img class="airline_logo" src="<?php echo $result_fly[0][$i]->fly_airline_logo; ?>" alt="">
+                                </div>
                             <?php
                             }
                             ?>
@@ -300,31 +302,31 @@
                             </div>
                         </div>
                     </div>
+                </label>
             </div>
-            </label>
             <input type="checkbox" id="result_hotel" name="" value="">
         </div>
     <?php
     }
     ?>
 
-<?php
+    <?php
 
 
 
 
 
 
-?>
+    ?>
 
 
-<h4>Retour</h4>
+    <h4>Retour</h4>
     <?php
     for ($i = 0; $i < count($result_fly[1]); $i++) {
     ?>
         <div class="form_content">
             <div class="form_info_fly">
-                <label for="result_fly_goings">
+                <label class="fly_content" for="result_fly_goings">
                     <div class="fly">
                         <div class="airline">
                             <?php
